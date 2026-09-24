@@ -1,0 +1,26 @@
+services:
+  oracle:
+    image: ${ORACLE_IMAGE}
+    container_name: ${ORACLE_CONTAINER_NAME}
+    restart: ${ORACLE_RESTART_POLICY}
+    environment:
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+      ORACLE_DATABASE: ${ORACLE_DATABASE}
+      ORACLE_CHARACTERSET: ${ORACLE_CHARACTERSET}
+      APP_USER: ${ORACLE_APP_USER}
+      APP_USER_PASSWORD: ${ORACLE_APP_PASSWORD}
+      ENABLE_ARCHIVELOG: ${ORACLE_ENABLE_ARCHIVELOG}
+    ports:
+      - "${ORACLE_PORT}:1521"
+      - "${ORACLE_EM_PORT}:5500"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: ${ORACLE_HEALTHCHECK_INTERVAL}
+      timeout: ${ORACLE_HEALTHCHECK_TIMEOUT}
+      retries: ${ORACLE_HEALTHCHECK_RETRIES}
+      start_period: ${ORACLE_HEALTHCHECK_START_PERIOD}
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+
+volumes:
+  oracle_data:
