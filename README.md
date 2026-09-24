@@ -1,16 +1,16 @@
 # datastack
 
-docker compose setups for local database development.
+Docker Compose setups for local database development.
 
-## services
+## Services
 
-| service | image | port |
+| Service | Image | Port |
 |---|---|---|
-| mysql 9.7 | `mysql:9.7` | 3306 |
-| sql server 2022 | `mcr.microsoft.com/mssql/server:2022-CU25-ubuntu-22.04` | 1433 |
-| oracle free | `gvenzl/oracle-free:latest` | 1521 |
+| MySQL 9.7 | `mysql:9.7` | 3306 |
+| SQL Server 2022 | `mcr.microsoft.com/mssql/server:2022-CU25-ubuntu-22.04` | 1433 |
+| Oracle Free | `gvenzl/oracle-free:latest` | 1521 |
 
-## usage
+## Usage
 
 ```sh
 # copy env files and set your passwords
@@ -27,19 +27,19 @@ docker compose --env-file oracle/.env -f oracle/compose.yml up -d
 docker ps
 ```
 
-## connecting
+## Connecting
 
-**mysql**
+**MySQL**
 ```sh
 mysql -h 127.0.0.1 -P 3306 -u appuser -p
 ```
 
-**sql server**
+**SQL Server**
 ```sh
 sqlcmd -S 127.0.0.1,1433 -U sa -P "your_password" -C
 ```
 
-**oracle**
+**Oracle**
 ```sh
 sqlplus system/your_password@//127.0.0.1:1521/FREEPDB1
 ```
@@ -51,6 +51,6 @@ startup. To initialize them again, remove the `oracle_data` volume:
 docker compose --env-file oracle/.env -f oracle/compose.yml down -v
 ```
 
-## license
+## License
 
 MIT License, see [LICENSE](LICENSE).
